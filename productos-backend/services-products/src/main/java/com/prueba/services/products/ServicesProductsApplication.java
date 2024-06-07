@@ -1,4 +1,4 @@
-package com.prueba.productos.services_products;
+package com.prueba.services.products;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
