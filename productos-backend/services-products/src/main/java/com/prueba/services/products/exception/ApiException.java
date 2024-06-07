@@ -1,26 +1,23 @@
 package com.prueba.services.products.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-import lombok.*;
-
-@Getter
-public class ApiException extends Exception{
+@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+public class ApiException extends BillingException {
 
 	private static final long serialVersionUID = -4787501325623567196L;
 	
-	private String message;
-	private HttpStatus httStatus;
-	
-	public ApiException(String message, HttpStatus httStatus) {
-		super(message);
-		this.message = message;
-		this.httStatus = httStatus;
+	public ApiException() {
+		super();
 	}
 	
-	@Override
-	public String toString() {
-		return message;
+	public ApiException(String code, String readableMessage, Throwable cause) {
+		super(code, readableMessage, cause);
+	}
+	
+	public ApiException(String code, String readableMessage) {
+		super(code, readableMessage);
 	}
 
 }
