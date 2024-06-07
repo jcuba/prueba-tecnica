@@ -24,22 +24,20 @@ public class ProductoServiceImpl implements ProductoService{
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public List<Productos> getAll() throws ApiException {
 		return productoRepository.findAll();
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public Productos update(Productos productos) throws ApiException {
-		return productoRepository.save(productos);
-	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public void deleteById(Long idProducto) throws ApiException {
 		productoRepository.deleteById(idProducto);
 		
+	}
+
+	@Override
+	public Productos getProducto(Long idProducto) throws ApiException {
+		return productoRepository.findById(idProducto).orElse(null);
 	}
 
 }
