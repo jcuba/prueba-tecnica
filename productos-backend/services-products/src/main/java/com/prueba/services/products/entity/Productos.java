@@ -12,15 +12,15 @@ public class Productos {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProducto;
-	private String nomProducto;
-	private double precio;
+	private String nombre;
+	private float precio;
 	
 	public Productos() {
 		super();
 	}
 
-	public Productos(String nomProducto, double precio) {
-		this.nomProducto = nomProducto;
+	public Productos(String nombre, float precio) {
+		this.nombre = nombre;
 		this.precio = precio;
 	}
 
@@ -31,21 +31,20 @@ public class Productos {
 	public void setIdProducto(Long idProducto) {
 		this.idProducto = idProducto;
 	}
-
-	public String getNomProducto() {
-		return nomProducto;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNomProducto(String nomProducto) {
-		this.nomProducto = nomProducto;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public double getPrecio() {
+	public float getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
+	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
-	
+
 }
