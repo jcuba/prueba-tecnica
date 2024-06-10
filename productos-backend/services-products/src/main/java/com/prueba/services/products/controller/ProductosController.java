@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,22 +37,7 @@ public class ProductosController {
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<Productos> getById(@PathVariable("id") Long idProducto){
-        if(!productoService.existsById(idProducto))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Productos producto = productoService.getOne(idProducto).get();
-        return new ResponseEntity(producto, HttpStatus.OK);
-    }
-
-    @GetMapping("/detailname/{nombre}")
-    public ResponseEntity<Productos> getByNombre(@PathVariable("nombre") String nombre){
-        if(!productoService.existsByNombre(nombre))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Productos producto = productoService.getByNombre(nombre).get();
-        return new ResponseEntity(producto, HttpStatus.OK);
-    }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ProductoDto productoDto){
         if(StringUtils.isBlank(productoDto.getNombre()))
@@ -68,6 +54,7 @@ public class ProductosController {
         return new ResponseEntity(new Mensaje("producto creado"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")Long idProducto, @RequestBody ProductoDto productoDto){
         if(!productoService.existsById(idProducto))
@@ -89,6 +76,7 @@ public class ProductosController {
         return new ResponseEntity(new Mensaje("producto actualizado"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id")Long idProducto){
         if(!productoService.existsById(idProducto))
