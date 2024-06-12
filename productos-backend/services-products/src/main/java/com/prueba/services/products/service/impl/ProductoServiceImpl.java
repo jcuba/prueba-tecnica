@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.prueba.services.products.entity.Productos;
+import com.prueba.services.products.exception.UserNotFoundException;
 import com.prueba.services.products.repository.ProductoRepository;
 import com.prueba.services.products.service.ProductoService;
 
@@ -41,8 +42,10 @@ public class ProductoServiceImpl implements ProductoService{
 	}
 
 	@Override
-	public void delete(Long idProducto) {
-		productoRepository.deleteById(idProducto);
+	public String delete(Long idProducto) {
+		Productos productosEntity = this.productoRepository.findById(idProducto).orElseThrow(() -> new UserNotFoundException("El producto con el id " + idProducto + " no existe"));
+		this.productoRepository.delete(productosEntity);
+		return "El producto fue eliminado correctamente";
 	}
 
 	@Override
@@ -60,6 +63,5 @@ public class ProductoServiceImpl implements ProductoService{
 		return productoRepository.findAll(pageable);
 	}
 
-	
 
 }

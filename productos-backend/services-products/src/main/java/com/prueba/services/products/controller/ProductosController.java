@@ -98,10 +98,7 @@ public class ProductosController {
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id")Long idProducto){
-        if(!productoService.existsById(idProducto))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        productoService.delete(idProducto);
-        return new ResponseEntity(new Mensaje("producto eliminado"), HttpStatus.OK);
+    	return new ResponseEntity<>(this.productoService.delete(idProducto), HttpStatus.OK);
     }
 
 }

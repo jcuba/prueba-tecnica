@@ -14,7 +14,7 @@ public interface ProductoService {
 	Optional<Productos> getOne(Long idProducto);
 	Optional<Productos> getByNombre(String nombre);
 	void save(Productos producto);
-	void delete(Long idProducto);
+	String delete(Long idProducto);
 	
 	public Page<Productos> paginas(Pageable pageable);
 	
